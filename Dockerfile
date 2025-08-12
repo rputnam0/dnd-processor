@@ -6,7 +6,10 @@ FROM nvcr.io/nvidia/pytorch:23.09-py3
 WORKDIR /app
 
 # 3. Install necessary system dependencies like ffmpeg
-RUN apt-get update && apt-get install -y --no-install-recommends ffmpeg
+RUN apt-get update && apt-get install -y --no-install-recommends gnupg && \
+    rm -rf /var/lib/apt/lists/* && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends ffmpeg
 
 # 4. Copy and install your Python packages
 COPY requirements.txt ./
